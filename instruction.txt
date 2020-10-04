@@ -1,0 +1,13 @@
+1. Tạo môi trường ảo
+cmd: python venv myenv (myenv là tên môi trường ảo cho dự án)
+- Active:
+cmd: myenv\Scripts\activate
+- Cài các gói yêu cầu:
+pip install -r requirements.txt
+
+2. Tạo cơ sở dữ liệu
+
+- cấu hình CSDL
+cmd: flask db init 
+flask db migrate
+flask db upgrade
