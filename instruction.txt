@@ -6,7 +6,6 @@ cmd: myenv\Scripts\activate
 pip install -r requirements.txt
 
 2. Tạo cơ sở dữ liệu
-
 - cấu hình CSDL
 cmd: flask db init 
 flask db migrate

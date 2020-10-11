@@ -1,22 +1,28 @@
+# import third party
 import logging
 from logging.handlers import HTTPHandler, RotatingFileHandler
 import os
 from flask import Flask, request, current_app
-from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
+# import local
+from config import Config
 
-
+# tạo các object db, migrate, login, bootstrap
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
+bootstrap = Bootstrap()
+# Function gọi khi sử dụng @login_required
 login.login_view = 'auth.login'
 login.login_message = 'Vui lòng đăng nhập để xem nội dung'
-bootstrap = Bootstrap()
 
+# import cuối để tránh vòng lặp
+from app import models
 
+# tạo app
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -26,6 +32,7 @@ def create_app(config_class=Config):
     login.init_app(app)
     bootstrap.init_app(app)
 
+    # Register blueprint
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
 
@@ -34,7 +41,7 @@ def create_app(config_class=Config):
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
-
+    # Error handle
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
             auth = None
@@ -64,5 +71,3 @@ def create_app(config_class=Config):
         app.logger.info('Website startup')
 
     return app
-
-from app import models

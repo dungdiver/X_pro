@@ -35,9 +35,19 @@ def edit_profile():
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
+        current_user.ho_dem = form.hodem.data
+        current_user.ten = form.ten.data
+        current_user.nam_gioi = form.namgioi.data
+        current_user.nhom_mau = form.nhommau.data
+        current_user.dan_toc = form.dantoc.data
         db.session.commit()
         flash('Đã sửa')
         return redirect(url_for('main.edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
+        form.hodem.data = current_user.ho_dem
+        form.ten.data = current_user.ten
+        form.nhommau= current_user.nhom_mau
+        form.namgioi = current_user.nam_gioi
+        form.dantoc = current_user.dan_toc
     return render_template('edit_profile.html', title='Edit Profile', form=form)

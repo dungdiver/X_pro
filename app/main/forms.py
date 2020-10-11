@@ -6,7 +6,11 @@ from app.models import User
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-
+    hodem= StringField('Họ đệm',validators=[DataRequired()])
+    ten = StringField('Tên')
+    namgioi = BooleanField('Nam giới', validators=[DataRequired()])
+    nhommau = StringField('Nhóm máu')
+    dantoc = StringField('Dân tộc')
     submit = SubmitField('Xác nhận')
 
     def __init__(self, original_username, *args, **kwargs):
