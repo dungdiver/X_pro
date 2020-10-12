@@ -43,6 +43,6 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('Đăng kí thành công, đăng nhập để tiếp tục!')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title='Đăng ký', form=form)
