@@ -6,17 +6,15 @@ from flask import Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_bootstrap import Bootstrap
 # import local
 from config import Config
-
-# tạo các object db, migrate, login, bootstrap
+# tạo các object db, migrate, login, bootstrap...
 db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
-bootstrap = Bootstrap()
-
+toolbar = DebugToolbarExtension()
 # Function gọi khi sử dụng @login_required
 login.login_view = 'auth.login'
 login.login_message = 'Vui lòng đăng nhập để xem nội dung'
@@ -28,12 +26,11 @@ from app import models
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
-    bootstrap.init_app(app)
-    toolbar = DebugToolbarExtension(app)
+    toolbar.init_app(app)
+    bootstrap = Bootstrap(app)
     # Register blueprint
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)

@@ -1,31 +1,29 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-{% if title %}{{ title }} - Công an Yên Bình{% else %}Welcome{% endif %}
+{{ title }} - YbiMIS
 {% endblock %}
 
 {% block navbar %}
+
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="True">
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">YBI-MIS</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">YbiMIS</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url_for('main.index') }}">Trang chủ</a></li>
                 {% if current_user.is_anonymous %}
                 <li><a href="{{ url_for('auth.login') }}">Đăng nhập</a></li>
                 {% else %}
-                <li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Đăng xuất</a></li>
                 {% endif %}
             </ul>
@@ -33,7 +31,6 @@
     </div>
 </nav>
 {% endblock %}
-
 {% block content %}
 <div class="container">
     {% with messages = get_flashed_messages() %}

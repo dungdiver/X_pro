@@ -9,3 +9,5 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = "mssql+pyodbc:///?odbc_connect=%s" % params
     SQLALCHEMY_CHECKMODIFICATIONS = False
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+    BOOTSTRAP_SERVE_LOCAL = True
